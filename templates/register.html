@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Left Side -->
+    <div class="left-panel">
+        <h1>AI Business Analytics</h1>
+
+        <p>
+            Create your account and start transforming business data
+            into powerful insights and forecasts.
+        </p>
+
+        <ul class="features">
+            <li>📊 Sales Analytics Dashboard</li>
+            <li>📈 Revenue Forecasting</li>
+            <li>🤖 AI Generated Insights</li>
+            <li>📄 Automated Business Reports</li>
+        </ul>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-panel">
+
+        <div class="form-box">
+
+            <h2>Create Account</h2>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text"
+                           name="username"
+                           placeholder="Enter username"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email"
+                           name="email"
+                           placeholder="Enter email"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password"
+                           name="password"
+                           placeholder="Enter password"
+                           required>
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password"
+                           name="confirm_password"
+                           placeholder="Confirm password"
+                           required>
+                </div>
+
+                <button type="submit" class="btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="register-link">
+                Already have an account?
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

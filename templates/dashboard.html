@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>📊 AI Business</h2>
+
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="{% url 'upload' %}">Upload Data</a></li>
+            <li><a href="#">Data Preview</a></li>
+            <li><a href="#">AI Insights</a></li>
+            <li><a href="#">Forecasting</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="header">
+            <h1>AI Business Analytics Dashboard</h1>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p>₹12,00,000</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Orders</h3>
+                <p>1500</p>
+            </div>
+
+            <div class="card">
+                <h3>Products</h3>
+                <p>120</p>
+            </div>
+
+            <div class="card">
+                <h3>Growth</h3>
+                <p>+12%</p>
+            </div>
+
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts">
+
+            <div class="chart-box">
+                Revenue Trend Chart
+            </div>
+
+            <div class="chart-box">
+                Product Performance Chart
+            </div>
+
+        </div>
+
+        <!-- AI Insights -->
+        <div class="insights">
+            <h2>🤖 AI Insights</h2>
+
+            <ul>
+                <li>Revenue increased by 15% compared to last month.</li>
+                <li>Laptop contributes 45% of total revenue.</li>
+                <li>Mouse sales decreased by 10%.</li>
+                <li>Marketing recommended for low-performing products.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

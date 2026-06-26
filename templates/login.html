@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left-panel">
+        <h1>AI Business Analytics</h1>
+
+        <p>
+            Transform raw business data into actionable insights
+            with AI-powered analytics and forecasting.
+        </p>
+
+        <ul class="features">
+            <li>📊 Sales Analytics</li>
+            <li>📈 Revenue Forecasting</li>
+            <li>🤖 AI Insights</li>
+            <li>📋 Automated Reports</li>
+        </ul>
+    </div>
+
+    <div class="right-panel">
+        <div class="form-box">
+
+            <h2>Welcome Back</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password">
+                </div>
+
+                <button type="submit" class="btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="register-link">
+                New User?
+                <a href="{% url 'register' %}">
+                    Create Account
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>
