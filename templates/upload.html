@@ -28,7 +28,74 @@
 
             <button type="submit">Upload File</button>
         </form>
-    </div>
 
+        {% if preview %}
+            <h3>Data Preview</h3>
+            <div class="table-container">
+                {{ preview|safe }}
+            </div>
+
+<!--            <a href="{% url 'dashboard' %}" class="dashboard-btn">-->
+<!--                Generate Dashboard-->
+<!--            </a>-->
+        {% endif %}
+
+        {% if columns %}
+
+        <h3>Select Columns</h3>
+
+        <form action="{% url 'dashboard' %}" method="POST">
+
+    {% csrf_token %}
+
+    <label>Revenue Column</label>
+
+            <select name="revenue">
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label>Sales Column</label>
+
+            <select name="sales">
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label>Product Column</label>
+
+            <select name="product">
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label>Date Column</label>
+
+            <select name="date">
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <button type="submit">
+                Generate Dashboard
+            </button>
+
+        </form>
+
+        {% endif %}
+
+    </div>
 </body>
 </html>

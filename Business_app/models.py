@@ -32,3 +32,14 @@ class Forecast(models.Model):
     class Meta:
         db_table = 'forecast'
 
+class ColumnMapping(models.Model):
+    dataset = models.OneToOneField(Dataset, on_delete=models.CASCADE)
+    revenue_column = models.CharField(max_length=100)
+    sales_column = models.CharField(max_length=100)
+    product_column = models.CharField(max_length=100)
+    date_column = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'column_mapping'
+
