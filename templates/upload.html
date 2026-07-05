@@ -4,98 +4,207 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Upload</title>
+    <title>Upload Business Report</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/upload.css' %}">
 </head>
+
 <body>
 
-    <div class="upload-container">
-        <h2>📊 Upload Business Data</h2>
-        <p>Upload your Excel or CSV file to generate analytics dashboard.</p>
+<div class="container py-5">
+
+    <!-- Logo -->
+    <div class="text-center mb-5">
+        <h1 class="logo">📊 AI Business Analytics</h1>
+        <p class="subtitle">
+            Upload your business reports and generate AI-powered insights.
+        </p>
+    </div>
+
+    <!-- Upload Card -->
+
+    <div class="upload-card">
+
+        <h2>Upload Business Report</h2>
+
+        <p class="mb-4">
+            Supported file formats:
+            <span>.csv</span>,
+            <span>.xlsx</span>,
+            <span>.xls</span>
+        </p>
 
         {% if success %}
-            <div class="success-message">{{ success }}</div>
+            <div class="alert alert-success">
+                {{ success }}
+            </div>
         {% endif %}
 
         {% if error %}
-            <div class="error-message">{{ error }}</div>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
         {% endif %}
 
         <form method="POST" enctype="multipart/form-data">
+
             {% csrf_token %}
 
-            <input type="file" name="datafile" accept=".csv,.xlsx" required>
+            <div class="upload-box">
 
-            <button type="submit">Upload File</button>
-        </form>
+                <div class="upload-icon">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                </div>
 
-        {% if preview %}
-            <h3>Data Preview</h3>
-            <div class="table-container">
-                {{ preview|safe }}
+                <h4>Choose Excel or CSV File</h4>
+
+                <p>
+                    Maximum Size : 20 MB
+                </p>
+
+                <input
+                        type="file"
+                        name="datafile"
+                        accept=".csv,.xlsx,.xls"
+                        required>
+
             </div>
 
-<!--            <a href="{% url 'dashboard' %}" class="dashboard-btn">-->
-<!--                Generate Dashboard-->
-<!--            </a>-->
-        {% endif %}
-
-        {% if columns %}
-
-        <h3>Select Columns</h3>
-
-        <form action="{% url 'dashboard' %}" method="POST">
-
-    {% csrf_token %}
-
-    <label>Revenue Column</label>
-
-            <select name="revenue">
-                {% for column in columns %}
-                    <option value="{{ column }}">{{ column }}</option>
-                {% endfor %}
-            </select>
-
-            <br><br>
-
-            <label>Sales Column</label>
-
-            <select name="sales">
-                {% for column in columns %}
-                    <option value="{{ column }}">{{ column }}</option>
-                {% endfor %}
-            </select>
-
-            <br><br>
-
-            <label>Product Column</label>
-
-            <select name="product">
-                {% for column in columns %}
-                    <option value="{{ column }}">{{ column }}</option>
-                {% endfor %}
-            </select>
-
-            <br><br>
-
-            <label>Date Column</label>
-
-            <select name="date">
-                {% for column in columns %}
-                    <option value="{{ column }}">{{ column }}</option>
-                {% endfor %}
-            </select>
-
-            <br><br>
-
-            <button type="submit">
-                Generate Dashboard
+            <button class="upload-btn mt-4">
+                Upload & Analyze
             </button>
 
         </form>
 
-        {% endif %}
+    </div>
+
+    <!-- Information -->
+
+    <div class="info-card mt-4">
+
+        <h4>How it Works</h4>
+
+        <ul>
+            <li>Upload your Excel or CSV report.</li>
+            <li>Our analytics engine processes your data.</li>
+            <li>Preview detected columns.</li>
+            <li>Generate AI-powered dashboards.</li>
+        </ul>
 
     </div>
+
+    <!-- Preview -->
+
+    {% if preview %}
+
+    <div class="preview-card mt-5">
+
+        <h3>Data Preview</h3>
+
+        <div class="table-responsive">
+
+            {{ preview|safe }}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Column Mapping -->
+
+    {% if columns %}
+
+    <div class="mapping-card mt-5">
+
+        <h3>Column Mapping</h3>
+
+        <form method="POST" action="{% url 'dashboard' %}">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Revenue Column</label>
+
+                    <select class="form-select" name="revenue">
+
+                        {% for column in columns %}
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Sales Column</label>
+
+                    <select class="form-select" name="sales">
+
+                        {% for column in columns %}
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Product Column</label>
+
+                    <select class="form-select" name="product">
+
+                        {% for column in columns %}
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Date Column</label>
+
+                    <select class="form-select" name="date">
+
+                        {% for column in columns %}
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button class="dashboard-btn mt-3">
+                Generate Dashboard →
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
 </body>
+
 </html>

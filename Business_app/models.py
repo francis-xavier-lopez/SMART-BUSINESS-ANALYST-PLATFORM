@@ -37,6 +37,7 @@ class ColumnMapping(models.Model):
     revenue_column = models.CharField(max_length=100)
     sales_column = models.CharField(max_length=100)
     product_column = models.CharField(max_length=100)
+    category_column = models.CharField(max_length=100, blank=True)
     date_column = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 

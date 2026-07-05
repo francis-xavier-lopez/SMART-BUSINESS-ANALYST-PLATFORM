@@ -45,7 +45,7 @@ def login_view(request):
         )
         if user:
             login(request, user)
-            return redirect("dashboard")
+            return redirect("upload")
 
         return render(request, "login.html", {
             "error": "Invalid Username or Password"

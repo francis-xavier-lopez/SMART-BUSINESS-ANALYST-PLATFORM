@@ -11,6 +11,10 @@
 
 <div class="container">
 
+    {% if error %}
+        <h3 style="color:red;">{{ error }}</h3>
+    {% endif %}
+
     <!-- Sidebar -->
     <div class="sidebar">
         <h2>📊 AI Business</h2>
@@ -39,22 +43,22 @@
 
             <div class="card">
                 <h3>Total Revenue</h3>
-                <p>₹12,00,000</p>
+                <p>₹{{ total_revenue }}</p>
             </div>
 
             <div class="card">
-                <h3>Total Orders</h3>
-                <p>1500</p>
+                <h3>Total Sales</h3>
+                <p>{{ total_sales }}</p>
             </div>
 
             <div class="card">
                 <h3>Products</h3>
-                <p>120</p>
+                <p>{{ total_products }}</p>
             </div>
 
             <div class="card">
                 <h3>Growth</h3>
-                <p>+12%</p>
+                <p>Coming Soon</p>
             </div>
 
         </div>

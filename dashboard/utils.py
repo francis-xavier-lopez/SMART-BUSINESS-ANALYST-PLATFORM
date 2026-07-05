@@ -38,6 +38,14 @@ def detect_columns(df):
             "order date",
             "invoice date",
             "purchase date"
+        ],
+
+        "category": [
+            "category",
+            "product category",
+            "department",
+            "segment",
+            "type"
         ]
     }
 
