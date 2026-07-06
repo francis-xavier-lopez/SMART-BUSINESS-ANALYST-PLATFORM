@@ -72,7 +72,7 @@
             </div>
 
             <div class="chart-box">
-                Product Performance Chart
+                <canvas id="productChart"></canvas>
             </div>
 
         </div>
@@ -111,6 +111,34 @@ new Chart(ctx, {
             borderWidth: 3,
             tension: 0.4,
             fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
+
+<script>
+const productLabels = {{ product_labels|safe }};
+const productValues = {{ product_values|safe }};
+
+const productCtx = document.getElementById('productChart');
+
+new Chart(productCtx, {
+    type: 'bar',
+    data: {
+        labels: productLabels,
+        datasets: [{
+            label: 'Revenue',
+            data: productValues,
+            borderWidth: 1
         }]
     },
     options: {
