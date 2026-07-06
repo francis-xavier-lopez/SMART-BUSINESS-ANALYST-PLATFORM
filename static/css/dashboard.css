@@ -2,70 +2,88 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    background:#f4f6f9;
+    background:#0B1120;
+    color:#fff;
 }
 
 .container{
     display:flex;
 }
 
-/* Sidebar */
+/* ================= Sidebar ================= */
 
 .sidebar{
-    width:250px;
+    width:260px;
     height:100vh;
-    background:#1e293b;
-    color:white;
+    background:#111827;
+    color:#fff;
     padding:25px;
     position:fixed;
+    left:0;
+    top:0;
+    border-right:1px solid #374151;
 }
 
 .sidebar h2{
-    margin-bottom:30px;
+    font-size:28px;
+    margin-bottom:40px;
 }
 
 .sidebar ul{
     list-style:none;
 }
 
-.sidebar ul li{
-    margin:15px 0;
+.sidebar li{
+    margin:12px 0;
 }
 
-.sidebar ul li a{
-    color:white;
-    text-decoration:none;
+.sidebar a{
     display:block;
-    padding:12px;
-    border-radius:8px;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:14px 18px;
+    border-radius:10px;
     transition:.3s;
 }
 
-.sidebar ul li a:hover{
-    background:#334155;
+.sidebar a:hover{
+    background:#2563eb;
+    color:#fff;
 }
 
-/* Main */
+/* ================= Main ================= */
 
 .main{
-    margin-left:250px;
-    width:100%;
-    padding:30px;
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:35px;
 }
 
+/* ================= Header ================= */
+
 .header{
+    background:#111827;
+    padding:25px;
+    border-radius:15px;
     margin-bottom:30px;
+    border:1px solid #374151;
 }
 
 .header h1{
-    color:#1e293b;
+    color:#fff;
+    font-size:32px;
 }
 
-/* Cards */
+.header p{
+    color:#94a3b8;
+    margin-top:8px;
+}
+
+/* ================= KPI Cards ================= */
 
 .cards{
     display:grid;
@@ -75,24 +93,32 @@ body{
 }
 
 .card{
-    background:white;
+    background:#1F2937;
     padding:25px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    border-radius:16px;
+    border:1px solid #374151;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#3B82F6;
+    box-shadow:0 12px 25px rgba(59,130,246,.25);
 }
 
 .card h3{
-    color:#64748b;
-    margin-bottom:10px;
+    color:#94A3B8;
+    font-size:18px;
+    margin-bottom:12px;
 }
 
 .card p{
-    font-size:28px;
+    font-size:32px;
     font-weight:bold;
-    color:#2563eb;
+    color:#3B82F6;
 }
 
-/* Charts */
+/* ================= Charts ================= */
 
 .charts{
     display:grid;
@@ -102,28 +128,29 @@ body{
 }
 
 .chart-box{
-    background:white;
-    height:300px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    height:330px;
+    background:#1F2937;
+    border-radius:16px;
+    border:1px solid #374151;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:20px;
-    color:#64748b;
+    color:#94A3B8;
+    font-size:22px;
 }
 
-/* Insights */
+/* ================= AI Insights ================= */
 
 .insights{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    background:#1F2937;
+    padding:30px;
+    border-radius:16px;
+    border:1px solid #374151;
 }
 
 .insights h2{
-    margin-bottom:15px;
+    margin-bottom:20px;
+    color:#fff;
 }
 
 .insights ul{
@@ -131,5 +158,25 @@ body{
 }
 
 .insights li{
-    margin-bottom:10px;
+    color:#cbd5e1;
+    margin-bottom:14px;
+    line-height:1.6;
+}
+
+/* ================= Scroll ================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#3B82F6;
+    border-radius:10px;
+}
+
+.chart-box{
+    background:#1f1f1f;
+    padding:20px;
+    border-radius:12px;
+    height:400px;
 }

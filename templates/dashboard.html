@@ -35,7 +35,8 @@
     <div class="main">
 
         <div class="header">
-            <h1>AI Business Analytics Dashboard</h1>
+            <h1>📊 AI Business Analytics Dashboard</h1>
+            <p>Welcome back! Here's your latest business analytics overview.</p>
         </div>
 
         <!-- KPI Cards -->
@@ -67,7 +68,7 @@
         <div class="charts">
 
             <div class="chart-box">
-                Revenue Trend Chart
+                <canvas id="revenueChart"></canvas>
             </div>
 
             <div class="chart-box">
@@ -91,6 +92,38 @@
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = {{ chart_labels|safe }};
+const values = {{ chart_values|safe }};
+
+const ctx = document.getElementById('revenueChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Revenue',
+            data: values,
+            borderWidth: 3,
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
 
 </body>
 </html>

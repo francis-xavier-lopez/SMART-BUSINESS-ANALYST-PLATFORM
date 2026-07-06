@@ -32,11 +32,34 @@ def dashboard(request):
     total_products = df[mapping.product_column].nunique()
     average_revenue = round(df[mapping.revenue_column].mean(), 2)
 
+    # Format revenue
+    total_revenue = f"{total_revenue:,.0f}"
+    total_sales = f"{total_sales:,}"
+    total_products = f"{total_products:,}"
+    average_revenue = f"{average_revenue:,.2f}"
+
+    # Convert date column to datetime
+    df[mapping.date_column] = pd.to_datetime(df[mapping.date_column])
+
+    # Group revenue by date
+    revenue_data = (
+        df.groupby(mapping.date_column)[mapping.revenue_column]
+        .sum()
+        .reset_index()
+    )
+
+    # Convert data for Chart.js
+    chart_labels = revenue_data[mapping.date_column].dt.strftime("%d-%m-%Y").tolist()
+    chart_values = revenue_data[mapping.revenue_column].tolist()
+
     context = {
         "total_revenue": total_revenue,
         "total_sales": total_sales,
         "total_products": total_products,
         "average_revenue": average_revenue,
+
+        "chart_labels": chart_labels,
+        "chart_values": chart_values,
     }
     return render(request, "dashboard.html", context)
 
