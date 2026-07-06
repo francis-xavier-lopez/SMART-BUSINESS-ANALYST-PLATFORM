@@ -63,6 +63,19 @@ def dashboard(request):
     product_labels = product_data.index.tolist()
     product_values = product_data.values.tolist()
 
+    # Revenue by Category
+    category_data = (
+        df.groupby(mapping.category_column)[mapping.revenue_column]
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+    category_labels = category_data.index.tolist()
+    category_values = category_data.values.tolist()
+
+    print(category_labels)
+    print(category_values)
+
     context = {
         "total_revenue": total_revenue,
         "total_sales": total_sales,
@@ -71,9 +84,14 @@ def dashboard(request):
 
         "chart_labels": chart_labels,
         "chart_values": chart_values,
+
         "product_labels": product_labels,
         "product_values": product_values,
+
+        "category_labels": category_labels,
+        "category_values": category_values,
     }
+
     return render(request, "dashboard.html", context)
 
 
