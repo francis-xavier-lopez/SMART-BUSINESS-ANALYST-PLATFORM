@@ -285,3 +285,23 @@ label{
 }
 
 }
+
+/* Preview Table Dark Theme */
+
+.preview-card .table th {
+    background: #2563eb !important;
+    color: white !important;
+}
+
+.preview-card .table td {
+    background: #111827 !important;
+    color: white !important;
+}
+
+.preview-card .table-striped tbody tr:nth-of-type(odd) td {
+    background: #172033 !important;
+}
+
+.preview-card .table-hover tbody tr:hover td {
+    background: #1e293b !important;
+}
