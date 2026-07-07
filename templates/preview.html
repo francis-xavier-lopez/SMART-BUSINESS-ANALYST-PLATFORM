@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data preview</title>
+    <link rel="stylesheet" href="{% static 'css/preview.css' %}">
+</head>
+<body>
+
+
+
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="header">
+            <h1>📄 Data Preview</h1>
+        </div>
+
+        {% if error %}
+            <p>{{ error }}</p>
+        {% else %}
+
+        <div class="dataset-cards">
+
+            <div class="info-card">
+                <h4>📁 Dataset</h4>
+                <p>{{ dataset_name }}</p>
+            </div>
+
+            <div class="info-card">
+                <h4>📄 Rows</h4>
+                <p>{{ total_rows }}</p>
+            </div>
+
+            <div class="info-card">
+                <h4>📊 Columns</h4>
+                <p>{{ total_columns }}</p>
+            </div>
+
+            <div class="info-card">
+                <h4>📅 Uploaded</h4>
+                <p>{{ uploaded_at|date:"d M Y" }}</p>
+            </div>
+
+        </div>
+
+        <form method="GET" class="search-form">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search..."
+                value="{{ request.GET.search }}"
+            >
+
+            <button type="submit">Search</button>
+
+        </form>
+
+        <div class="table-container">
+            {{ preview|safe }}
+        </div>
+
+        <div class="pagination">
+
+            {% if page > 1 %}
+                <a href="?page={{ page|add:-1 }}&search={{ search }}">⬅ Previous</a>
+            {% endif %}
+
+            <span>Page {{ page }} of {{ total_pages }}</span>
+
+            {% if page < total_pages %}
+                <a href="?page={{ page|add:1 }}&search={{ search }}">Next ➡</a>
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+</body>
+</html>
