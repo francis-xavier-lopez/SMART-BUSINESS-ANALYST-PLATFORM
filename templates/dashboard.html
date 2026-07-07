@@ -48,7 +48,7 @@
             </div>
 
             <div class="card">
-                <h3>Total Sales</h3>
+                <h3>Total Sales QTY</h3>
                 <p>{{ total_sales }}</p>
             </div>
 
@@ -59,7 +59,7 @@
 
             <div class="card">
                 <h3>Growth</h3>
-                <p>Coming Soon</p>
+                <p>18%</p>
             </div>
 
         </div>
@@ -75,13 +75,18 @@
                 <canvas id="productChart"></canvas>
             </div>
 
-            <div class="charts">
+        </div>
+
+        <!-- Second Row Charts -->
+        <div class="charts">
 
             <div class="chart-box">
                 <canvas id="categoryChart"></canvas>
             </div>
 
-        </div>
+            <div class="chart-box">
+                <canvas id="monthlyChart"></canvas>
+            </div>
 
         </div>
 
@@ -179,6 +184,36 @@ new Chart(categoryCtx, {
     options: {
         responsive: true,
         maintainAspectRatio: false
+    }
+});
+</script>
+
+<script>
+const monthlyLabels = {{ monthly_labels|safe }};
+const monthlyValues = {{ monthly_values|safe }};
+
+const monthlyCtx = document.getElementById('monthlyChart');
+
+new Chart(monthlyCtx, {
+    type: 'line',
+    data: {
+        labels: monthlyLabels,
+        datasets: [{
+            label: 'Monthly Revenue',
+            data: monthlyValues,
+            borderWidth: 2,
+            fill: false,
+            tension: 0.3
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
     }
 });
 </script>

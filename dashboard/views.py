@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Business_app.models import Dataset, ColumnMapping
 from .utils import detect_columns
+from .services import calculate_kpis
+from .charts import generate_charts
 import pandas as pd
 
 # Create your views here.
@@ -27,69 +29,15 @@ def dashboard(request):
         df = pd.read_excel(dataset.file.path)
 
     # Calculate KPI values
-    total_revenue = df[mapping.revenue_column].sum()
-    total_sales = df[mapping.sales_column].sum()
-    total_products = df[mapping.product_column].nunique()
-    average_revenue = round(df[mapping.revenue_column].mean(), 2)
+    kpis = calculate_kpis(df, mapping)
 
-    # Format revenue
-    total_revenue = f"{total_revenue:,.0f}"
-    total_sales = f"{total_sales:,}"
-    total_products = f"{total_products:,}"
-    average_revenue = f"{average_revenue:,.2f}"
+    # Generate all chart data
+    charts = generate_charts(df, mapping)
 
-    # Convert date column to datetime
-    df[mapping.date_column] = pd.to_datetime(df[mapping.date_column])
-
-    # Group revenue by date
-    revenue_data = (
-        df.groupby(mapping.date_column)[mapping.revenue_column]
-        .sum()
-        .reset_index()
-    )
-
-    # Convert data for Chart.js
-    chart_labels = revenue_data[mapping.date_column].dt.strftime("%d-%m-%Y").tolist()
-    chart_values = revenue_data[mapping.revenue_column].tolist()
-
-    # Top Products by Revenue
-    product_data = (
-        df.groupby(mapping.product_column)[mapping.revenue_column]
-        .sum()
-        .sort_values(ascending=False)
-        .head(10)
-    )
-
-    product_labels = product_data.index.tolist()
-    product_values = product_data.values.tolist()
-
-    # Revenue by Category
-    category_data = (
-        df.groupby(mapping.category_column)[mapping.revenue_column]
-        .sum()
-        .sort_values(ascending=False)
-    )
-
-    category_labels = category_data.index.tolist()
-    category_values = category_data.values.tolist()
-
-    print(category_labels)
-    print(category_values)
 
     context = {
-        "total_revenue": total_revenue,
-        "total_sales": total_sales,
-        "total_products": total_products,
-        "average_revenue": average_revenue,
-
-        "chart_labels": chart_labels,
-        "chart_values": chart_values,
-
-        "product_labels": product_labels,
-        "product_values": product_values,
-
-        "category_labels": category_labels,
-        "category_values": category_values,
+        **kpis,
+        **charts,
     }
 
     return render(request, "dashboard.html", context)
