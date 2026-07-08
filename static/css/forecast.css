@@ -1,0 +1,159 @@
+/* ===========================
+   Global
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+
+.sidebar{
+    width:240px;
+    background:#111827;
+    padding:25px;
+}
+
+.sidebar h2{
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin:15px 0;
+}
+
+.sidebar a{
+    color:#cbd5e1;
+    text-decoration:none;
+    display:block;
+    padding:12px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+    color:white;
+}
+
+/* ===========================
+   Main
+=========================== */
+
+.main{
+    flex:1;
+    padding:35px;
+}
+
+.main h1{
+    margin-bottom:25px;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.info-card,
+.prediction-card,
+.table-card{
+
+    background:#1e293b;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+
+}
+
+.info-card h3,
+.prediction-card h2,
+.table-card h2{
+    margin-bottom:15px;
+}
+
+.prediction-card h1{
+
+    color:#3b82f6;
+    font-size:40px;
+
+}
+
+/* ===========================
+   Table
+=========================== */
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#2563eb;
+    color:white;
+    padding:12px;
+
+}
+
+table td{
+
+    background:#111827;
+    color:white;
+    padding:10px;
+    border-bottom:1px solid #334155;
+
+}
+
+table tr:hover td{
+
+    background:#1f2937;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+.container{
+
+    flex-direction:column;
+
+}
+
+.sidebar{
+
+    width:100%;
+
+}
+
+.main{
+
+    padding:20px;
+
+}
+
+}

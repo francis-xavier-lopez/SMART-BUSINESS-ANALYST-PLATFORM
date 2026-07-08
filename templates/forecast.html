@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Forcast</title>
+
+    <link rel="stylesheet" href="{% static 'css/forecast.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>📊 AI Business</h2>
+
+        <ul>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'upload' %}">Upload Data</a></li>
+            <li><a href="{% url 'preview' %}">Data Preview</a></li>
+            <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
+            <li><a href="{% url 'forecast' %}">Forecast</a></li>
+        </ul>
+
+    </div>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <h1>📈 Revenue Forecast</h1>
+
+        {% if error %}
+
+            <h3>{{ error }}</h3>
+
+        {% else %}
+
+        <div class="info-card">
+
+            <h3>Dataset</h3>
+
+            <p>{{ dataset_name }}</p>
+
+        </div>
+
+        <div class="prediction-card">
+
+            <h2>Predicted Next Month Revenue</h2>
+
+            <h1>₹ {{ prediction }}</h1>
+
+        </div>
+
+        <div class="table-card">
+
+            <h2>Monthly Revenue</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Month</th>
+                        <th>Revenue</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for row in monthly_data %}
+
+                <tr>
+
+                    <td>{{ row.month }}</td>
+
+                    <td>₹ {{ row.revenue }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

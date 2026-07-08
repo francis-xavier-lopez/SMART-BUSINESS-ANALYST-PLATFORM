@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Insights</title>
+    <link rel="stylesheet" href="{% static 'css/ai.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <h2>📊 AI Business</h2>
+
+        <ul>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'upload' %}">Upload Data</a></li>
+            <li><a href="{% url 'preview' %}">Data Preview</a></li>
+            <li><a href="{% url 'ai_insights' %}" class="active">AI Insights</a></li>
+        </ul>
+
+    </div>
+
+    <div class="main">
+
+        <h1>🤖 AI Business Insights</h1>
+
+        {% if error %}
+
+            <p>{{ error }}</p>
+
+        {% else %}
+
+            <div class="dataset-box">
+                Dataset :
+                <strong>{{ dataset_name }}</strong>
+            </div>
+
+            <div class="insight-grid">
+
+                {% for insight in insights %}
+
+                <div class="insight-card">
+
+                    <div class="icon">
+                        {{ insight.icon }}
+                    </div>
+
+                    <h2>{{ insight.title }}</h2>
+
+                    <h3>{{ insight.value }}</h3>
+
+                    <p>{{ insight.description }}</p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

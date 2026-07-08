@@ -23,8 +23,8 @@
             <li><a href="#">Dashboard</a></li>
             <li><a href="{% url 'upload' %}">Upload Data</a></li>
             <li><a href="{% url 'preview' %}">Data Preview</a></li>
-            <li><a href="#">AI Insights</a></li>
-            <li><a href="#">Forecasting</a></li>
+            <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
+            <li><a href="{% url 'forecast' %}">Forecast</a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Logout</a></li>
@@ -90,17 +90,6 @@
 
         </div>
 
-        <!-- AI Insights -->
-        <div class="insights">
-            <h2>🤖 AI Insights</h2>
-
-            <ul>
-                <li>Revenue increased by 15% compared to last month.</li>
-                <li>Laptop contributes 45% of total revenue.</li>
-                <li>Mouse sales decreased by 10%.</li>
-                <li>Marketing recommended for low-performing products.</li>
-            </ul>
-        </div>
 
     </div>
 

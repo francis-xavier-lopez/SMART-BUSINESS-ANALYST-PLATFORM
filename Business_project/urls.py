@@ -28,6 +28,5 @@ urlpatterns = [
     path('', views.login_view, name="login"),
 
     path('dashboard/', include('dashboard.urls')),
-    path('forecast/', include('forecasting.urls')),
     path('analytics/', include('analytics.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
