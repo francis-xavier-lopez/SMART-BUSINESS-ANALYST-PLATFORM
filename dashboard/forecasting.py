@@ -1,3 +1,5 @@
+from sklearn.linear_model import LinearRegression
+import numpy as np
 import pandas as pd
 
 
@@ -25,26 +27,23 @@ def prepare_monthly_data(df, mapping):
 
     return monthly_data
 
-
 def forecast_next_month(monthly_data, mapping):
-    """
-    Simple forecast:
-    Predict next month's revenue
-    using the average monthly growth.
-    """
 
-    revenues = monthly_data["revenue"].tolist()
+    revenues = monthly_data["revenue"].values
 
-    if len(revenues) < 2:
-        return revenues[-1]
+    # X = Month numbers
+    X = np.arange(len(revenues)).reshape(-1, 1)
 
-    growth = []
+    # Y = Revenue
+    y = revenues
 
-    for i in range(1, len(revenues)):
-        growth.append(revenues[i] - revenues[i - 1])
+    model = LinearRegression()
 
-    average_growth = sum(growth) / len(growth)
+    model.fit(X, y)
 
-    prediction = revenues[-1] + average_growth
+    # Predict next month
+    next_month = np.array([[len(revenues)]])
 
-    return round(prediction, 2)
+    prediction = model.predict(next_month)
+
+    return round(float(prediction[0]), 2)

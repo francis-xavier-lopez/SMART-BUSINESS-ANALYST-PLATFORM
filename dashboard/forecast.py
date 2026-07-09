@@ -48,8 +48,14 @@ def forecast(request):
 
     context = {
         "dataset_name": dataset.name,
+
         "monthly_data": monthly_data.to_dict("records"),
+
         "prediction": prediction,
+
+        "months": monthly_data["month"].tolist(),
+
+        "revenues": monthly_data["revenue"].tolist(),
     }
 
     return render(

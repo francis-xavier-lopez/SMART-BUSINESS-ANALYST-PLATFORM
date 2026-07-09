@@ -157,3 +157,23 @@ table tr:hover td{
 }
 
 }
+
+/* ===========================
+   Chart
+=========================== */
+
+.chart-card{
+
+    background:#1e293b;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+
+}
+
+.chart-card canvas{
+
+    height:400px;
+
+}
