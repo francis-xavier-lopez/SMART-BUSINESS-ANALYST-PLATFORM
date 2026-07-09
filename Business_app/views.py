@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -51,6 +52,10 @@ def login_view(request):
             "error": "Invalid Username or Password"
         })
     return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
 
 
 

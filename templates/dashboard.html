@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
 </head>
 <body>
 
@@ -27,7 +28,10 @@
             <li><a href="{% url 'forecast' %}">Forecast</a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Logout</a></li>
+            <li>
+                <a href="#" id="logoutBtn">Logout</a>
+            </li>
+
         </ul>
     </div>
 
@@ -97,6 +101,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 {{ chart_labels|json_script:"chart-labels" }}
 {{ chart_values|json_script:"chart-values" }}
 
@@ -108,6 +114,10 @@
 
 {{ monthly_labels|json_script:"monthly-labels" }}
 {{ monthly_values|json_script:"monthly-values" }}
+
+<script>
+    const logoutUrl = "{% url 'logout' %}";
+</script>
 
 <script src="{% static 'js/dashboard.js' %}"></script>
 

@@ -188,3 +188,36 @@ new Chart(document.getElementById("monthlyChart"), {
     }
 
 });
+
+
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        Swal.fire({
+            title: "Logout?",
+            text: "Are you sure you want to logout?",
+            icon: "question",
+            background: "#1e293b",
+            color: "#ffffff",
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#ef4444",
+            confirmButtonText: "Yes, Logout",
+            cancelButtonText: "Cancel",
+            showCancelButton: true
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                window.location.href = logoutUrl;
+            }
+
+        });
+
+    });
+
+}
