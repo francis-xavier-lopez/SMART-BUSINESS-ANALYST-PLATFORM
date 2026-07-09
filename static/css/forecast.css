@@ -103,33 +103,53 @@ body{
 =========================== */
 
 table{
-
     width:100%;
     border-collapse:collapse;
-
+    margin-top:20px;
 }
+
+table th,
+table td{
+    padding:16px 22px;
+    border-bottom:1px solid #334155;
+}
+
+/* Header */
 
 table th{
-
     background:#2563eb;
-    color:white;
-    padding:12px;
-
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
 }
+
+/* Body */
 
 table td{
-
     background:#111827;
-    color:white;
-    padding:10px;
-    border-bottom:1px solid #334155;
-
+    color:#e5e7eb;
+    font-size:16px;
 }
 
-table tr:hover td{
+/* Month Column */
 
+table th:first-child,
+table td:first-child{
+    text-align:left;
+}
+
+/* Revenue Column */
+
+table th:last-child,
+table td:last-child{
+    text-align:right;
+}
+
+/* Hover */
+
+table tbody tr:hover td{
     background:#1f2937;
-
+    transition:0.2s ease;
 }
 
 /* ===========================
