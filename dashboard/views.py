@@ -9,6 +9,7 @@ from .upload import upload_file
 from .insights import ai_insights
 from .forecast import forecast
 from .reports import reports, download_report
+from .datasets import dataset_list, use_dataset
 import math
 import pandas as pd
 
@@ -18,7 +19,10 @@ import pandas as pd
 def dashboard(request):
 
     # Get latest uploaded dataset
-    dataset = Dataset.objects.filter(user=request.user).order_by("-uploaded_at").first()
+    dataset = Dataset.objects.filter(
+        user=request.user,
+        is_active=True
+    ).first()
 
     if not dataset:
         return render(request, "dashboard.html", {

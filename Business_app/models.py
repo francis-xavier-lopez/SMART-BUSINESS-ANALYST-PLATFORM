@@ -11,6 +11,7 @@ class Dataset(models.Model):
     name = models.CharField(max_length=200)
     file = models.FileField(upload_to='datasets/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'dataset'

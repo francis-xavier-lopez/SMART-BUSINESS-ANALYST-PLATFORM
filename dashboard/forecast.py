@@ -16,8 +16,9 @@ def forecast(request):
 
     # Get latest uploaded dataset
     dataset = Dataset.objects.filter(
-        user=request.user
-    ).order_by("-uploaded_at").first()
+        user=request.user,
+        is_active=True
+    ).first()
 
     if not dataset:
         return render(request, "forecast.html", {

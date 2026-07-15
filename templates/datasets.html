@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Datasets</title>
+
+    <link rel="stylesheet" href="{% static 'css/datasets.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📁 My Datasets</h1>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Dataset</th>
+                    <th>Uploaded</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for dataset in datasets %}
+
+                <tr>
+
+                    <td>{{ dataset.name }}</td>
+
+                    <td>
+                        {{ dataset.uploaded_at|date:"d M Y, h:i A" }}
+                    </td>
+
+                    <td>
+
+                        {% if dataset.is_active %}
+
+                            <span class="active">
+                                ✅ Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="inactive">
+                                Inactive
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if not dataset.is_active %}
+
+                            <a href="{% url 'use_dataset' dataset.id %}" class="btn">
+                                Use Dataset
+                            </a>
+
+                        {% else %}
+
+                            <span class="active">
+                                Currently Using
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if request.GET.success %}
+
+<script>
+
+Swal.fire({
+
+    title: "Dataset Activated!",
+    text: "The selected dataset is now active.",
+    icon: "success",
+    background: "#1F2937",
+    color: "#fff",
+    confirmButtonColor: "#2563EB",
+    showCancelButton: true,
+
+    confirmButtonText: "Go to Dashboard",
+    cancelButtonText: "Stay Here"
+
+}).then((result) => {
+
+    if(result.isConfirmed){
+
+        window.location.href = "{% url 'dashboard' %}";
+
+    }
+
+});
+
+</script>
+
+{% endif %}
+
+</body>
+</html>

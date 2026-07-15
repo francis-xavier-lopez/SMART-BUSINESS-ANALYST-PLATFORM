@@ -13,8 +13,9 @@ from reportlab.lib import colors
 def reports(request):
 
     dataset = Dataset.objects.filter(
-        user=request.user
-    ).order_by("-uploaded_at").first()
+        user=request.user,
+        is_active=True
+    ).first()
 
     if not dataset:
 
@@ -67,8 +68,9 @@ def reports(request):
 def download_report(request):
 
     dataset = Dataset.objects.filter(
-        user=request.user
-    ).order_by("-uploaded_at").first()
+        user=request.user,
+        is_active=True
+    ).first()
 
     if not dataset:
         return HttpResponse("No dataset found.")

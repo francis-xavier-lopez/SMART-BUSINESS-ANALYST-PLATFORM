@@ -9,4 +9,6 @@ urlpatterns = [
     path('forecast/', views.forecast, name='forecast'),
     path("reports/", views.reports, name="reports"),
     path("download-report/", views.download_report, name="download_report"),
+    path("datasets/",views.dataset_list,name="datasets"),
+    path("datasets/use/<int:dataset_id>/",views.use_dataset,name="use_dataset",),
 ]

@@ -25,11 +25,17 @@ def upload_file(request):
                 "error": "Only CSV and Excel files are allowed."
             })
 
+        # Make all previous datasets inactive
+        Dataset.objects.filter(
+            user=request.user
+        ).update(is_active=False)
+
         # Save dataset
         dataset = Dataset.objects.create(
             user=request.user,
             name=uploaded_file.name,
-            file=uploaded_file
+            file=uploaded_file,
+            is_active=True
         )
 
         # Read file
