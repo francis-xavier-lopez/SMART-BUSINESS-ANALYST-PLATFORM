@@ -1,0 +1,174 @@
+/* ==========================
+   Global
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0B1120;
+    color:#fff;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ==========================
+   Sidebar
+========================== */
+
+.sidebar{
+    width:260px;
+    background:#111827;
+    padding:25px;
+}
+
+.sidebar h2{
+    margin-bottom:35px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin:12px 0;
+}
+
+.sidebar a{
+    display:block;
+    text-decoration:none;
+    color:#cbd5e1;
+    padding:12px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#16a34a;
+    color:white;
+}
+
+/* ==========================
+   Main
+========================== */
+
+.main{
+    flex:1;
+    padding:35px;
+}
+
+.main h1{
+    margin-bottom:25px;
+}
+
+/* ==========================
+   Dataset Card
+========================== */
+
+.dataset-card{
+    background:#1F2937;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:25px;
+    border:1px solid #374151;
+}
+
+.dataset-card h3{
+    margin-bottom:10px;
+    color:#94a3b8;
+}
+
+/* ==========================
+   Summary Cards
+========================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:#1F2937;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid #374151;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#22c55e;
+    box-shadow:0 10px 25px rgba(34,197,94,.25);
+}
+
+.card h3{
+    color:#94a3b8;
+    margin-bottom:12px;
+}
+
+.card h2{
+    color:#22c55e;
+    font-size:30px;
+}
+
+/* ==========================
+   Download Buttons
+========================== */
+
+.download-section{
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+}
+
+.btn{
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#15803d;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:900px){
+
+.cards{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.container{
+    flex-direction:column;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.download-section{
+    flex-direction:column;
+}
+
+}

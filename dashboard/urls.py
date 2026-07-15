@@ -7,4 +7,6 @@ urlpatterns = [
     path('preview/', views.data_preview, name='preview'),
     path("ai-insights/", views.ai_insights, name="ai_insights"),
     path('forecast/', views.forecast, name='forecast'),
+    path("reports/", views.reports, name="reports"),
+    path("download-report/", views.download_report, name="download_report"),
 ]

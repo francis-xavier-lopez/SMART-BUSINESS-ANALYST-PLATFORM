@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reports</title>
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>📊 AI Business</h2>
+
+        <ul>
+
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'upload' %}">Upload Data</a></li>
+            <li><a href="{% url 'preview' %}">Data Preview</a></li>
+            <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
+            <li><a href="{% url 'forecast' %}">Forecast</a></li>
+            <li><a href="{% url 'reports' %}">Reports</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <h1>📄 Business Report</h1>
+
+        {% if error %}
+
+            <h3>{{ error }}</h3>
+
+        {% else %}
+
+        <div class="dataset-card">
+
+            <h3>Dataset</h3>
+
+            <p>{{ dataset_name }}</p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Total Revenue</h3>
+
+                <h2>₹ {{ total_revenue }}</h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Total Sales</h3>
+
+                <h2>{{ total_sales }}</h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Total Products</h3>
+
+                <h2>{{ total_products }}</h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Top Product</h3>
+
+                <h2>{{ top_product }}</h2>
+
+            </div>
+
+        </div>
+
+        <div class="download-section">
+
+            <a href="{% url 'download_report' %}" class="btn">
+                📄 Download PDF Report
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/reports.js' %}"></script>
+
+</body>
+
+</html>

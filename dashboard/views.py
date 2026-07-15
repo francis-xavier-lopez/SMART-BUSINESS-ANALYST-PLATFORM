@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Business_app.models import Dataset, ColumnMapping
-from .utils import detect_columns
 from .services import calculate_kpis
 from .charts import generate_charts
+from .utils import detect_columns
 from .preview import data_preview
 from .upload import upload_file
 from .insights import ai_insights
 from .forecast import forecast
+from .reports import reports, download_report
 import math
 import pandas as pd
 
