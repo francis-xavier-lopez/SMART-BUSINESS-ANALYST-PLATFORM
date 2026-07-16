@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Chat</title>
+
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🤖 AI Business Assistant</h1>
+
+    <p class="subtitle">
+        Ask questions about your uploaded dataset.
+    </p>
+
+    <div class="chat-box">
+
+        {% if answer %}
+
+            <div class="message bot">
+
+                <strong>AI:</strong>
+
+                <p>{{ answer }}</p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                name="question"
+                placeholder="Ask something..."
+                required
+            >
+
+            <button type="submit">
+
+                Send
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

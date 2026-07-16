@@ -61,7 +61,7 @@
 
                         {% if not dataset.is_active %}
 
-                            <a href="{% url 'use_dataset' dataset.id %}" class="btn">
+                            <a href="{% url 'use_dataset' dataset.id %}" class="btn use-btn">
                                 Use Dataset
                             </a>
 
@@ -71,6 +71,13 @@
                                 Currently Using
                             </span>
 
+                        {% endif %}
+
+                        {% if not dataset.is_active %}
+                            <a href="{% url 'delete_dataset' dataset.id %}"
+                               class="btn delete-btn deleteDataset">
+                                🗑 Delete
+                            </a>
                         {% endif %}
 
                     </td>
@@ -119,6 +126,49 @@ Swal.fire({
 </script>
 
 {% endif %}
+
+<script>
+
+document.querySelectorAll(".deleteDataset").forEach(button => {
+
+    button.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        const deleteUrl = this.href;
+
+        Swal.fire({
+
+            title: "Delete Dataset?",
+            text: "This action cannot be undone.",
+            icon: "warning",
+
+            background: "#1F2937",
+            color: "#ffffff",
+
+            confirmButtonColor: "#dc2626",
+            cancelButtonColor: "#2563eb",
+
+            confirmButtonText: "Delete",
+            cancelButtonText: "Cancel",
+
+            showCancelButton: true
+
+        }).then((result)=>{
+
+            if(result.isConfirmed){
+
+                window.location.href = deleteUrl;
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>

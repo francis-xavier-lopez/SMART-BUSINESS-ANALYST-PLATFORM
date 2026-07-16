@@ -9,7 +9,8 @@ from .upload import upload_file
 from .insights import ai_insights
 from .forecast import forecast
 from .reports import reports, download_report
-from .datasets import dataset_list, use_dataset
+from .datasets import dataset_list, use_dataset, delete_dataset
+from .chatbot import chatbot
 import math
 import pandas as pd
 

@@ -26,6 +26,7 @@
             <li><a href="{% url 'datasets' %}">Datasets</a></li>
             <li><a href="{% url 'preview' %}">Data Preview</a></li>
             <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
+            <li><a href="{% url 'chatbot' %}">🤖 AI Chat</a></li>
             <li><a href="{% url 'forecast' %}">Forecast</a></li>
             <li><a href="{% url 'reports' %}">Reports</a></li>
             <li><a href="#">Settings</a></li>
@@ -64,7 +65,7 @@
 
             <div class="card">
                 <h3>Growth</h3>
-                <p>18%</p>
+                <p>{{ growth }}%</p>
             </div>
 
         </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from Business_app.models import Dataset
+import os
 
 
 @login_required
@@ -38,3 +39,32 @@ def use_dataset(request, dataset_id):
     ).update(is_active=True)
 
     return redirect("/dashboard/datasets/?success=1")
+
+@login_required
+def delete_dataset(request, dataset_id):
+
+    dataset = Dataset.objects.filter(
+        id=dataset_id,
+        user=request.user
+    ).first()
+
+    if dataset:
+
+        # Delete uploaded file
+        if dataset.file and os.path.isfile(dataset.file.path):
+            os.remove(dataset.file.path)
+
+        # Delete database record
+        dataset.delete()
+
+        # If deleted dataset was active,
+        # activate the latest remaining dataset
+        latest = Dataset.objects.filter(
+            user=request.user
+        ).order_by("-uploaded_at").first()
+
+        if latest:
+            latest.is_active = True
+            latest.save()
+
+    return redirect("/dashboard/datasets/?deleted=1")

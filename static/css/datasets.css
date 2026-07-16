@@ -61,3 +61,28 @@ tr:hover{
 .btn:hover{
     background:#1d4ed8;
 }
+
+.use-btn{
+    background:#2563eb;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    margin-right:8px;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+.use-btn:hover{
+    background:#1d4ed8;
+}
+
+.delete-btn:hover{
+    background:#b91c1c;
+}
