@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-
 </head>
 <body>
 
@@ -20,52 +19,102 @@
     <div class="sidebar">
         <h2>📊 AI Business</h2>
 
-        <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="{% url 'upload' %}">Upload Data</a></li>
-            <li><a href="{% url 'datasets' %}">Datasets</a></li>
-            <li><a href="{% url 'preview' %}">Data Preview</a></li>
-            <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
-            <li><a href="{% url 'chatbot' %}">🤖 AI Chat</a></li>
-            <li><a href="{% url 'forecast' %}">Forecast</a></li>
-            <li><a href="{% url 'reports' %}">Reports</a></li>
-            <li><a href="#">Settings</a></li>
-            <li>
-                <a href="#" id="logoutBtn">Logout</a>
-            </li>
+        <div class="nav-group">
+            <p class="nav-label">Main</p>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="{% url 'ai_insights' %}">AI Insights</a></li>
+                <li><a href="{% url 'chatbot' %}">🤖 AI Chat</a></li>
+                <li><a href="{% url 'forecast' %}">Forecast</a></li>
+            </ul>
+        </div>
 
-        </ul>
+        <div class="nav-group">
+            <p class="nav-label">Data</p>
+            <ul>
+                <li><a href="{% url 'upload' %}">Upload Data</a></li>
+                <li><a href="{% url 'datasets' %}">Datasets</a></li>
+                <li><a href="{% url 'preview' %}">Data Preview</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <p class="nav-label">Analyze</p>
+            <ul>
+                <li><a href="{% url 'reports' %}">Reports</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group nav-group-bottom">
+            <p class="nav-label">Account</p>
+            <ul>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
     </div>
 
     <!-- Main Content -->
     <div class="main">
 
         <div class="header">
-            <h1>📊 AI Business Analytics Dashboard</h1>
-            <p>Welcome back! Here's your latest business analytics overview.</p>
+            <div>
+                <h1>📊 AI Business Analytics Dashboard</h1>
+                <p>Welcome back! Here's your latest business analytics overview.</p>
+            </div>
+            <div class="header-right">
+                <span class="date-chip">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Last 30 days
+                </span>
+            </div>
         </div>
 
         <!-- KPI Cards -->
         <div class="cards">
 
-            <div class="card">
-                <h3>Total Revenue</h3>
-                <p>₹{{ total_revenue }}</p>
+            <div class="card card-accent card-purple">
+                <div class="card-icon-wrap wrap-light">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Total Revenue</h3>
+                    <p>₹{{ total_revenue }}</p>
+                </div>
+            </div>
+
+            <div class="card card-accent card-teal">
+                <div class="card-icon-wrap wrap-light">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Total Sales QTY</h3>
+                    <p>{{ total_sales }}</p>
+                </div>
             </div>
 
             <div class="card">
-                <h3>Total Sales QTY</h3>
-                <p>{{ total_sales }}</p>
+                <div class="card-icon-wrap wrap-purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <div class="card-body">
+                    <h3>Products</h3>
+                    <p>{{ total_products }}</p>
+                </div>
             </div>
 
             <div class="card">
-                <h3>Products</h3>
-                <p>{{ total_products }}</p>
-            </div>
-
-            <div class="card">
-                <h3>Growth</h3>
-                <p>{{ growth }}%</p>
+                <div class="card-icon-wrap {% if growth < 0 %}wrap-pink{% else %}wrap-teal{% endif %}">
+                    {% if growth < 0 %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                    {% else %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h3>Growth</h3>
+                    <p class="{% if growth < 0 %}negative{% else %}positive{% endif %}">{{ growth }}%</p>
+                </div>
             </div>
 
         </div>
@@ -86,7 +135,7 @@
         <!-- Second Row Charts -->
         <div class="charts">
 
-            <div class="chart-box">
+            <div class="chart-box chart-pie">
                 <canvas id="categoryChart"></canvas>
             </div>
 
@@ -116,6 +165,11 @@
 
 {{ monthly_labels|json_script:"monthly-labels" }}
 {{ monthly_values|json_script:"monthly-values" }}
+
+{{ revenue_chart_title|json_script:"revenue-chart-title" }}
+{{ product_chart_title|json_script:"product-chart-title" }}
+{{ category_chart_title|json_script:"category-chart-title" }}
+{{ monthly_chart_title|json_script:"monthly-chart-title" }}
 
 <script>
     const logoutUrl = "{% url 'logout' %}";

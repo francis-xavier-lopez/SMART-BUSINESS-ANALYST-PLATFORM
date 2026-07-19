@@ -10,7 +10,7 @@ from .insights import ai_insights
 from .forecast import forecast
 from .reports import reports, download_report
 from .datasets import dataset_list, use_dataset, delete_dataset
-from .chatbot import chatbot
+from .chatbot import chatbot, clear_chat
 import math
 import pandas as pd
 

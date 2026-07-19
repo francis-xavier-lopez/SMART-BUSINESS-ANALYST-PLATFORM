@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AI Chat</title>
+    <title>AI Business Assistant</title>
 
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
 </head>
@@ -12,38 +12,102 @@
 
 <div class="container">
 
-    <h1>🤖 AI Business Assistant</h1>
+    <div class="header">
 
-    <p class="subtitle">
-        Ask questions about your uploaded dataset.
-    </p>
+        <div class="header-left">
 
-    <div class="chat-box">
+            <h1>🤖 AI Business Assistant</h1>
 
-        {% if answer %}
+            <p class="subtitle">
+                Ask questions about your uploaded dataset.
+            </p>
 
-            <div class="message bot">
+        </div>
 
-                <strong>AI:</strong>
+        <a href="{% url 'clear_chat' %}"
+           class="clear-btn"
+           id="clearChat">
 
-                <p>{{ answer }}</p>
+            🗑 Clear Chat
 
-            </div>
+        </a>
+
+    </div>
+
+    <!-- Suggested Questions -->
+
+    <div class="suggestions">
+
+        <button onclick="setQuestion('Summarize my business')">
+            📊 Business Summary
+        </button>
+
+        <button onclick="setQuestion('Which product generated the highest revenue?')">
+            🏆 Top Product
+        </button>
+
+        <button onclick="setQuestion('Give me marketing recommendations')">
+            💡 Marketing Advice
+        </button>
+
+        <button onclick="setQuestion('Which category needs improvement?')">
+            📦 Category Analysis
+        </button>
+
+    </div>
+
+    <!-- Chat -->
+
+    <div class="chat-box" id="chatBox">
+
+        {% if chat_history %}
+
+            {% for chat in chat_history %}
+
+                <div class="message user">
+
+                    <strong>👤 You</strong>
+
+                    <p>{{ chat.question }}</p>
+
+                </div>
+
+                <div class="message bot">
+
+                    <strong>🤖 AI</strong>
+
+                    <p>{{ chat.answer|linebreaksbr }}</p>
+
+                </div>
+
+            {% endfor %}
 
         {% endif %}
 
     </div>
 
-    <form method="POST">
+    <!-- Loading -->
+
+    <div id="loading" class="loading" style="display:none;">
+
+        🤖 AI is analyzing your business...
+
+    </div>
+
+    <!-- Form -->
+
+    <form method="POST" id="chatForm">
 
         {% csrf_token %}
 
         <div class="input-area">
 
             <input
+                id="question"
                 type="text"
                 name="question"
-                placeholder="Ask something..."
+                placeholder="Ask anything about your business..."
+                autocomplete="off"
                 required
             >
 
@@ -58,6 +122,76 @@
     </form>
 
 </div>
+
+<script>
+
+function setQuestion(question){
+
+    document.getElementById("question").value = question;
+
+}
+
+document.getElementById("chatForm").addEventListener("submit", function(){
+
+    document.getElementById("loading").style.display = "block";
+
+});
+
+window.onload = function(){
+
+    const chat = document.getElementById("chatBox");
+
+    chat.scrollTop = chat.scrollHeight;
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+document.getElementById("clearChat").addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    const url=this.href;
+
+    Swal.fire({
+
+        title:"Clear Chat?",
+
+        text:"All conversation history will be removed.",
+
+        icon:"warning",
+
+        background:"#1F2937",
+
+        color:"#fff",
+
+        confirmButtonColor:"#dc2626",
+
+        cancelButtonColor:"#2563EB",
+
+        showCancelButton:true,
+
+        confirmButtonText:"Clear",
+
+        cancelButtonText:"Cancel"
+
+    }).then((result)=>{
+
+        if(result.isConfirmed){
+
+            window.location.href=url;
+
+        }
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>

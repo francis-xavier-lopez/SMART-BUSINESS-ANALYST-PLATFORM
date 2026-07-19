@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from Business_app.models import Dataset, ColumnMapping
 from .gemini_service import ask_gemini
@@ -10,6 +11,7 @@ import pandas as pd
 def chatbot(request):
 
     answer = ""
+    chat_history = request.session.get("chat_history", [])
 
     if request.method == "POST":
 
@@ -54,11 +56,27 @@ def chatbot(request):
 
             answer = ask_gemini(prompt)
 
+            chat_history.append({
+                "question": question,
+                "answer": answer
+            })
+
+            request.session["chat_history"] = chat_history
+
     return render(
         request,
         "chatbot.html",
         {
-            "answer": answer
+            "answer": answer,
+            "chat_history": chat_history
         }
     )
+
+
+@login_required
+def clear_chat(request):
+
+    request.session.pop("chat_history", None)
+
+    return redirect("chatbot")
 

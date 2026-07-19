@@ -54,17 +54,28 @@ def delete_dataset(request, dataset_id):
         if dataset.file and os.path.isfile(dataset.file.path):
             os.remove(dataset.file.path)
 
+        # Remember if this dataset was active
+        was_active = dataset.is_active
+
         # Delete database record
         dataset.delete()
 
-        # If deleted dataset was active,
+        # If the deleted dataset was active,
         # activate the latest remaining dataset
-        latest = Dataset.objects.filter(
-            user=request.user
-        ).order_by("-uploaded_at").first()
+        if was_active:
 
-        if latest:
-            latest.is_active = True
-            latest.save()
+            # First make sure all remaining datasets are inactive
+            Dataset.objects.filter(
+                user=request.user
+            ).update(is_active=False)
+
+            latest = Dataset.objects.filter(
+                user=request.user
+            ).order_by("-uploaded_at").first()
+
+            if latest:
+
+                latest.is_active = True
+                latest.save()
 
     return redirect("/dashboard/datasets/?deleted=1")

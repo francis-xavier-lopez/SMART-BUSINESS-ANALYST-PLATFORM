@@ -13,4 +13,5 @@ urlpatterns = [
     path("datasets/use/<int:dataset_id>/",views.use_dataset,name="use_dataset",),
     path("datasets/delete/<int:dataset_id>/",views.delete_dataset,name="delete_dataset",),
     path("chat/",views.chatbot,name="chatbot"),
+    path("chat/clear/", views.clear_chat, name="clear_chat"),
 ]
