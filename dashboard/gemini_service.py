@@ -7,7 +7,7 @@ genai.configure(
 )
 
 # Create Gemini model
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-flash-latest")
 
 
 def ask_gemini(prompt):

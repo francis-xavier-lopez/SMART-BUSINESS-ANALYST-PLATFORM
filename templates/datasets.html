@@ -5,170 +5,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Datasets</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/datasets.css' %}">
 </head>
 <body>
 
-<div class="container">
+<div class="page">
 
-    <h1>📁 My Datasets</h1>
+    <!-- Sidebar -->
+    <div class="sidebar">
 
-    <div class="table-card">
+        <div class="brand">
+            <div class="logo-mark"><i class="bi bi-bar-chart-fill"></i></div>
+            <span>AI Business</span>
+        </div>
 
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Dataset</th>
-                    <th>Uploaded</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-            {% for dataset in datasets %}
-
-                <tr>
-
-                    <td>{{ dataset.name }}</td>
-
-                    <td>
-                        {{ dataset.uploaded_at|date:"d M Y, h:i A" }}
-                    </td>
-
-                    <td>
-
-                        {% if dataset.is_active %}
-
-                            <span class="active">
-                                ✅ Active
-                            </span>
-
-                        {% else %}
-
-                            <span class="inactive">
-                                Inactive
-                            </span>
-
-                        {% endif %}
-
-                    </td>
-
-                    <td>
-
-                        {% if not dataset.is_active %}
-
-                            <a href="{% url 'use_dataset' dataset.id %}" class="btn use-btn">
-                                Use Dataset
-                            </a>
-
-                        {% else %}
-
-                            <span class="active">
-                                Currently Using
-                            </span>
-
-                        {% endif %}
-
-                        {% if not dataset.is_active %}
-                            <a href="{% url 'delete_dataset' dataset.id %}"
-                               class="btn delete-btn deleteDataset">
-                                🗑 Delete
-                            </a>
-                        {% endif %}
-
-                    </td>
-
-                </tr>
-
-            {% endfor %}
-
-            </tbody>
-
-        </table>
-
+        <ul>
+            <li><a href="{% url 'dashboard' %}"><i class="bi bi-layout-text-window-reverse"></i> Dashboard</a></li>
+            <li><a href="{% url 'upload' %}"><i class="bi bi-cloud-arrow-up"></i> Upload Data</a></li>
+            <li><a href="{% url 'datasets' %}" class="active"><i class="bi bi-database"></i> Datasets</a></li>
+            <li><a href="{% url 'preview' %}"><i class="bi bi-table"></i> Data Preview</a></li>
+            <li><a href="{% url 'ai_insights' %}"><i class="bi bi-stars"></i> AI Insights</a></li>
+            <li><a href="{% url 'forecast' %}"><i class="bi bi-graph-up-arrow"></i> Forecast</a></li>
+        </ul>
     </div>
 
+    <div class="container">
+
+        <div class="page-heading">
+            <div class="heading-icon"><i class="bi bi-database"></i></div>
+            <div>
+                <h1>My Datasets</h1>
+                <p class="page-sub">Manage and switch between your uploaded datasets</p>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Uploaded</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for dataset in datasets %}
+                    <tr>
+                        <td class="name-cell">
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                            {{ dataset.name }}
+                        </td>
+                        <td>
+                            {{ dataset.uploaded_at|date:"d M Y, h:i A" }}
+                        </td>
+                        <td>
+                            {% if dataset.is_active %}
+                                <span class="status-badge active">
+                                    <i class="bi bi-check-circle-fill"></i> Active
+                                </span>
+                            {% else %}
+                                <span class="status-badge inactive">
+                                    Inactive
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="action-cell">
+                            {% if not dataset.is_active %}
+                                <a href="{% url 'use_dataset' dataset.id %}" class="btn use-btn">
+                                    <i class="bi bi-play-circle"></i> Use Dataset
+                                </a>
+                                <a href="{% url 'delete_dataset' dataset.id %}"
+                                   class="btn delete-btn deleteDataset">
+                                    <i class="bi bi-trash3"></i> Delete
+                                </a>
+                            {% else %}
+                                <span class="status-badge active">
+                                    <i class="bi bi-check-circle-fill"></i> Currently Using
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 {% if request.GET.success %}
-
 <script>
-
 Swal.fire({
-
     title: "Dataset Activated!",
     text: "The selected dataset is now active.",
     icon: "success",
-    background: "#1F2937",
+    background: "#1B1E31",
     color: "#fff",
-    confirmButtonColor: "#2563EB",
+    confirmButtonColor: "#B23DD1",
+    cancelButtonColor: "#23263B",
     showCancelButton: true,
-
     confirmButtonText: "Go to Dashboard",
     cancelButtonText: "Stay Here"
-
 }).then((result) => {
-
     if(result.isConfirmed){
-
         window.location.href = "{% url 'dashboard' %}";
-
     }
-
 });
-
 </script>
-
 {% endif %}
-
 <script>
-
 document.querySelectorAll(".deleteDataset").forEach(button => {
-
     button.addEventListener("click", function(e){
-
         e.preventDefault();
-
         const deleteUrl = this.href;
-
         Swal.fire({
-
             title: "Delete Dataset?",
             text: "This action cannot be undone.",
             icon: "warning",
-
-            background: "#1F2937",
+            background: "#1B1E31",
             color: "#ffffff",
-
-            confirmButtonColor: "#dc2626",
-            cancelButtonColor: "#2563eb",
-
+            confirmButtonColor: "#F28CA0",
+            cancelButtonColor: "#23263B",
             confirmButtonText: "Delete",
             cancelButtonText: "Cancel",
-
             showCancelButton: true
-
         }).then((result)=>{
-
             if(result.isConfirmed){
-
                 window.location.href = deleteUrl;
-
             }
-
         });
-
     });
-
 });
-
 </script>
-
 </body>
 </html>

@@ -6,6 +6,8 @@ const revenues = JSON.parse(
     document.getElementById("revenues-data").textContent
 );
 
+const actualCount = revenues.length;
+
 months.push("Prediction");
 revenues.push(prediction);
 
@@ -20,17 +22,26 @@ new Chart(ctx, {
         datasets: [{
             label: "Revenue",
             data: revenues,
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59,130,246,0.2)",
+            borderColor: "#38C6D9",
+            backgroundColor: "rgba(56,198,217,0.12)",
             fill: true,
             tension: 0.3,
-            pointRadius: 5,
-            pointHoverRadius: 8
+            borderWidth: 2.5,
+            pointRadius: (context) => context.dataIndex === actualCount ? 6 : 4,
+            pointHoverRadius: 8,
+            pointBackgroundColor: (context) => context.dataIndex === actualCount ? "#B23DD1" : "#38C6D9",
+            pointBorderColor: "#12152A",
+            pointBorderWidth: 2,
+            segment: {
+                borderColor: (context) => context.p1DataIndex === actualCount ? "#B23DD1" : "#38C6D9",
+                borderDash: (context) => context.p1DataIndex === actualCount ? [6, 4] : undefined
+            }
         }]
     },
 
     options: {
         responsive: true,
+        maintainAspectRatio: false,
 
         plugins: {
             legend: {
@@ -41,13 +52,21 @@ new Chart(ctx, {
         scales: {
             x: {
                 ticks: {
-                    color: "white"
+                    color: "#6B6B7D"
+                },
+                grid: {
+                    color: "#1E2136",
+                    drawBorder: false
                 }
             },
 
             y: {
                 ticks: {
-                    color: "white"
+                    color: "#6B6B7D"
+                },
+                grid: {
+                    color: "#1E2136",
+                    drawBorder: false
                 }
             }
         }

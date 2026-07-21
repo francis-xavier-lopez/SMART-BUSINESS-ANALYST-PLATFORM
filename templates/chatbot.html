@@ -5,103 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Business Assistant</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
 </head>
 <body>
-
 <div class="container">
 
     <div class="header">
-
         <div class="header-left">
-
-            <h1>🤖 AI Business Assistant</h1>
-
-            <p class="subtitle">
-                Ask questions about your uploaded dataset.
-            </p>
-
+            <a href="{% url 'dashboard' %}" class="back-btn" title="Back to Dashboard">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div class="heading-icon"><i class="bi bi-robot"></i></div>
+            <div>
+                <h1>AI Business Assistant</h1>
+                <p class="subtitle">Ask questions about your uploaded dataset</p>
+            </div>
         </div>
-
         <a href="{% url 'clear_chat' %}"
            class="clear-btn"
            id="clearChat">
-
-            🗑 Clear Chat
-
+            <i class="bi bi-trash3"></i> Clear Chat
         </a>
-
     </div>
 
     <!-- Suggested Questions -->
-
     <div class="suggestions">
-
         <button onclick="setQuestion('Summarize my business')">
-            📊 Business Summary
+            <i class="bi bi-bar-chart"></i> Business Summary
         </button>
-
         <button onclick="setQuestion('Which product generated the highest revenue?')">
-            🏆 Top Product
+            <i class="bi bi-trophy"></i> Top Product
         </button>
-
         <button onclick="setQuestion('Give me marketing recommendations')">
-            💡 Marketing Advice
+            <i class="bi bi-lightbulb"></i> Marketing Advice
         </button>
-
         <button onclick="setQuestion('Which category needs improvement?')">
-            📦 Category Analysis
+            <i class="bi bi-box-seam"></i> Category Analysis
         </button>
-
     </div>
 
     <!-- Chat -->
-
     <div class="chat-box" id="chatBox">
-
         {% if chat_history %}
-
             {% for chat in chat_history %}
-
                 <div class="message user">
-
-                    <strong>👤 You</strong>
-
+                    <strong><i class="bi bi-person-circle"></i> You</strong>
                     <p>{{ chat.question }}</p>
-
                 </div>
-
                 <div class="message bot">
-
-                    <strong>🤖 AI</strong>
-
+                    <strong><i class="bi bi-robot"></i> AI</strong>
                     <p>{{ chat.answer|linebreaksbr }}</p>
-
                 </div>
-
             {% endfor %}
-
         {% endif %}
-
     </div>
 
     <!-- Loading -->
-
     <div id="loading" class="loading" style="display:none;">
-
-        🤖 AI is analyzing your business...
-
+        <i class="bi bi-robot"></i> AI is analyzing your business...
     </div>
 
     <!-- Form -->
-
     <form method="POST" id="chatForm">
-
         {% csrf_token %}
-
         <div class="input-area">
-
             <input
                 id="question"
                 type="text"
@@ -110,88 +78,48 @@
                 autocomplete="off"
                 required
             >
-
             <button type="submit">
-
                 Send
-
             </button>
-
         </div>
-
     </form>
-
 </div>
 
 <script>
-
 function setQuestion(question){
-
     document.getElementById("question").value = question;
-
 }
-
 document.getElementById("chatForm").addEventListener("submit", function(){
-
-    document.getElementById("loading").style.display = "block";
-
+    document.getElementById("loading").style.display = "flex";
 });
-
 window.onload = function(){
-
     const chat = document.getElementById("chatBox");
-
     chat.scrollTop = chat.scrollHeight;
-
 }
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-
 document.getElementById("clearChat").addEventListener("click", function(e){
-
     e.preventDefault();
-
     const url=this.href;
-
     Swal.fire({
-
         title:"Clear Chat?",
-
         text:"All conversation history will be removed.",
-
         icon:"warning",
-
-        background:"#1F2937",
-
+        background:"#1B1E31",
         color:"#fff",
-
-        confirmButtonColor:"#dc2626",
-
-        cancelButtonColor:"#2563EB",
-
+        confirmButtonColor:"#B23DD1",
+        cancelButtonColor:"#23263B",
         showCancelButton:true,
-
         confirmButtonText:"Clear",
-
         cancelButtonText:"Cancel"
-
     }).then((result)=>{
-
         if(result.isConfirmed){
-
             window.location.href=url;
-
         }
-
     });
-
 });
-
 </script>
-
 </body>
 </html>
