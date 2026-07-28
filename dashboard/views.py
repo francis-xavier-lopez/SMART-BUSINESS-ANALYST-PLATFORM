@@ -11,6 +11,7 @@ from .forecast import forecast
 from .reports import reports, download_report
 from .datasets import dataset_list, use_dataset, delete_dataset
 from .chatbot import chatbot, clear_chat
+from .settings import settings_view,delete_account
 import math
 import pandas as pd
 
